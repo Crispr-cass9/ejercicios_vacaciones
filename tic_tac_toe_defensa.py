@@ -9,6 +9,7 @@ jugadas_totales=0
 
 fila_movimiento = None
 columna_movimiento = None
+empate=False
 def DisplayBoard(board):
 
     print('+-------+-------+-------+\n',
@@ -25,7 +26,13 @@ def DisplayBoard(board):
       '|       |       |       |\n',
       '+-------+-------+-------+\n',sep="")
     global jugadas_totales
+    global empate
     jugadas_totales+=1
+    print(jugadas_totales)
+    if jugadas_totales == 9:
+        empate=True
+    return empate
+    print('jugadas:', jugadas_totales)
     
 def EnterMove(board):
     valida = False
@@ -72,10 +79,11 @@ def DrawMove(posiciones_vacias):
     print('Turno de la máquina')
     estado_columna = [board[fila][columna_movimiento] for fila in range(3)]
 
-    if board[fila_movimiento].count('O') == 2 and fila_movimiento!=1:
+    if board[fila_movimiento].count('O') == 2 and fila_movimiento!=1 and board[fila_movimiento].count('X') == 0:
+        print('Entre')
         board[fila_movimiento] = ['X' if signo != 'O' else 'O' for signo in board[fila_movimiento]]
     
-    elif estado_columna.count('O') == 2 and columna_movimiento!=1:
+    elif estado_columna.count('O') == 2 and columna_movimiento!=1 and estado_columna.count('X') == 0:
         print('entré')
         for i in range(3):
             if board[i][columna_movimiento] != 'O':
@@ -88,9 +96,12 @@ def DrawMove(posiciones_vacias):
 
 def VictoryFor(board, signo):
     global jugadas_totales
-
     if jugadas_totales >= 5:
-        if board[fila_movimiento].count(signo) == 3:
+        if board[0].count(signo) == 3:
+            return True
+        elif board[1].count(signo) == 3:
+            return True
+        elif board[2].count(signo) == 3:
             return True
         elif (board[0][0] == signo) and (board[1][0] == signo) and (board[2][0] == signo):
             return True
@@ -104,24 +115,27 @@ def VictoryFor(board, signo):
             if (board[2][0] == signo) and (board[0][2] == signo):
                 return True
             
-            
+DisplayBoard(board)  
+
 for i in range(8):
-    DisplayBoard(board)
     EnterMove(board)
     DisplayBoard(board)
     if VictoryFor(board, 'O'):
         print("La victoria es para el humano")
         break
-    if jugadas_totales==9:
+    if empate:
         print('Es un empate')
+        break
     posiciones_vacias = MakeListOfFreeFields(board)
     DrawMove(posiciones_vacias)
+    DisplayBoard(board)
     if VictoryFor(board, 'X'):
         DisplayBoard(board)
         print("La victoria es para la máquina")
         break
-    if jugadas_totales==8:
-        print('\n', '*'*13,'Es un empate', '*'*13)
+    if empate:
+        print('Es un empate')
+        break
 
 
 
