@@ -61,3 +61,186 @@ print(fibonacci(7))
  print(sumatoria(100))
  # --> 5050
  ```
+
+## <span class="red">Ejercicio 3</span>
+
+ Implementar una función para calcular el producto de dos números enteros dados.
+
+ ```python
+ def multiplicacion(a,b):
+    if b==1:
+        return a
+    return a + multiplicacion(a, b-1)
+
+print(multiplicacion(5, 4))
+#--> 20
+ ```
+
+## <span class="red">Ejercicio 4</span>
+
+ Implementar una función para calcular la potencia dado dos números enteros, el primero representa la base y segundo el exponente
+
+```python
+def potencia(a,b):
+    if b==1:
+        return a
+    return a * potencia(a, b-1)
+
+print(potencia(5, 4))
+#--> 625
+```
+## <span class="red">Ejercicio 5</span>
+
+ Desarrollar una función que permita convertir un número romano en un número decimal.
+
+ ```python
+ '''
+ Esta es la primera versión, sin embargo luego de un poco de estudio he recordado este ejercicio y encontré una forma más legible para programarlo, la adjunto en la versión 2
+ '''
+ def romano_a_decimal(string):
+    lista = list(string)
+    if len(lista) == 0:
+        return 0
+    romano = lista.pop(0)
+
+    if romano == 'M':
+        return 1000 + romano_a_decimal(lista)
+    
+    elif romano == 'D':
+        if len(lista) != 0 and lista[0] in 'M':
+            return -500 + romano_a_decimal(lista)
+        return 500 + romano_a_decimal(lista)
+
+    elif romano == 'C':
+        if len(lista) != 0 and lista[0] in 'DM':
+            return -100 + romano_a_decimal(lista)
+        return 100 + romano_a_decimal(lista)
+
+    elif romano == 'L':
+        if len(lista) != 0 and lista[0] in 'CDM':
+            return -50 + romano_a_decimal(lista)
+        return 50 + romano_a_decimal(lista)
+
+    elif romano == 'X':
+        if len(lista) != 0 and lista[0] in 'LCDM':
+            return -10 + romano_a_decimal(lista)
+        return 10 + romano_a_decimal(lista)
+
+    elif romano == 'V':
+        if len(lista) != 0 and lista[0] in 'XLCDM':
+            return -5 + romano_a_decimal(lista)
+        return 5 + romano_a_decimal(lista)
+
+    elif romano == 'I':
+        if len(lista) != 0 and lista[0] in 'VXLCDM':
+            return -1 + romano_a_decimal(lista)
+        return 1 + romano_a_decimal(lista)
+
+print(romano_a_decimal('XLV'))
+#--> 45
+```
+### <span class="red">Versión Número 2</span>
+
+```python
+def romano_a_decimal(string):
+    if not string:
+        return 0
+    
+    valores = {'M':1000, 'D':500, 'C':100, 'L':50, 'X':10, 'V':5, 'I':1}
+
+    valor_decimal = valores[string[0]]
+    
+    if len(string) > 1 and valores[string[1]] > valor_decimal:
+        return -valor_decimal + romano_a_decimal(string[1:])
+    return valor_decimal + romano_a_decimal(string[1:])
+
+print(romano_a_decimal('XLV'))
+#--> 45
+```
+
+## <span class="red">Ejercicio 6</span>
+ Dada una secuencia de caracteres, obtener dicha secuencia invertida
+
+```python
+def revertir(string):
+    print(string)
+    if len(string) <= 1:
+        return string
+    return revertir(string[1:]) + string[0]
+
+print(revertir('mecanografía'))
+#-->aífargonacem
+```
+## <span class="red">Ejercicio 7</span>
+
+ Desarrollar un algoritmo que permita calcular la siguiente serie:
+
+ ![Alt text](image-1.png)
+
+ ```python
+ def serie(n):
+    if n == 0:
+        return 'No puedes dividir por 0'
+    elif n == 1:
+        return n
+    return 1/n + serie(n-1)
+print(serie(4))
+#-->2.08333333
+```
+
+
+### Notas de Cristian, aún no logro resolverlo D:
+
+## <span class="red">Ejercicio 8</span>
+
+Implementar una función para calcular el logaritmo entero de número n en una base b. Recordar que:
+Eppa, notas de Cristian, el libro aparentemente tiene un pequeño error, aparece esta imagen:
+![Alt text](image-2.png)
+
+Pero buscando un poco más de información sobre las propiedades de los logaritmos me he dado cuenta de que realmente debería ser esta la fórmula:
+
+![Alt text](image-3.png)
+
+## <span class="red">Ejercicio 9</span>
+
+Desarrollar un algoritmo que cuente la cantidad de dígitos de un número entero.
+
+```python
+def contar_digitos(n):
+    if n/10<1:
+        return 1
+    return contar_digitos(n/10) +1
+
+print(contar_digitos(1234886234))
+#--> 10
+```
+## <span class="red">Ejercicio 10</span>
+ Desarrollar un algoritmo que invierta un número entero sin convertirlo a cadena.
+
+ ```python
+import math
+
+'''
+
+Notas de Cristian, Este estuvo un poco más complejo, les recomiendo no ver la solución en código y darle unas cuantas vueltas antes de ver la solución
+
+'''
+import math
+
+def invertir(n=1023):
+    
+    if n<=1 and n>=-1:
+        return n
+    
+    if n<0:
+        return -1*(abs(n)%10 * 10 ** math.trunc(math.log10(abs(n)))) +  invertir(math.trunc(n/10))
+
+    return n%10 * 10 ** math.trunc(math.log10(n)) +  invertir(n//10) 
+
+print(invertir(-123456789))
+
+#-->-987654321
+```
+
+## <span class="red">Ejercicio 11</span>
+
