@@ -53,13 +53,21 @@ print(fibonacci(7))
  Implementar una función que calcule la suma de todos los números enteros comprendidos entre cero y un número entero positivo dado.
 
  ```python
- def sumatoria(n):
-    if n == 1:
-        return n
-    return n + sumatoria(n-1)
+ '''
+ Suma el primer numero y vuelve a llamarse pero restando 1, cuando n sea igual a 1 se finaliza la recursividad
+ '''
 
- print(sumatoria(100))
- # --> 5050
+ def sumatoria(n):
+     if n == 0:
+         return 0
+
+     if n<0: #Para el caso en que n sea negativo
+         print(n)
+         return n + sumatoria(n+1)
+
+     return n + sumatoria(n-1) 
+
+ print(sumatoria(-10))
  ```
 
 ## <span class="red">Ejercicio 3</span>
@@ -68,12 +76,16 @@ print(fibonacci(7))
 
  ```python
  def multiplicacion(a,b):
-    if b==1:
+    if b==1 or b == -1:
         return a
+    #Caso en que sea negativo, multiplico por -1 y llamo a la misma función como si fuera poitiva
+    if b < 0: 
+        return -1*(a + multiplicacion(a, abs(b)-1))
+
     return a + multiplicacion(a, b-1)
 
-print(multiplicacion(5, 4))
-#--> 20
+ print(multiplicacion(-5, -4))
+ #--> 20
  ```
 
 ## <span class="red">Ejercicio 4</span>
@@ -81,13 +93,16 @@ print(multiplicacion(5, 4))
  Implementar una función para calcular la potencia dado dos números enteros, el primero representa la base y segundo el exponente
 
 ```python
-def potencia(a,b):
+ def potencia(a,b):
     if b==1:
         return a
+    #Caso exponente negativo
+    if b<0:
+        return 1/(a*potencia(a, abs(b)-1))
     return a * potencia(a, b-1)
 
-print(potencia(5, 4))
-#--> 625
+ print(potencia(-5, -4))
+ #--> 0.0016
 ```
 ## <span class="red">Ejercicio 5</span>
 
@@ -207,13 +222,17 @@ Pero buscando un poco más de información sobre las propiedades de los logaritm
 Desarrollar un algoritmo que cuente la cantidad de dígitos de un número entero.
 
 ```python
-def contar_digitos(n):
+ def contar_digitos(n):
+    #Antes de comprobar el caso base compruebo si es negativo ya que mi caso base interrumpirá la ejecución esperada en caso de que lo sea. 
+    if n < 0:
+        return 1 + contar_digitos(abs(n)/10) #Paso n a positivo
+    
     if n/10<1:
         return 1
-    return contar_digitos(n/10) +1
+    return 1 + contar_digitos(n/10)
 
-print(contar_digitos(1234886234))
-#--> 10
+ print(contar_digitos(-1234886234))
+ #--> 10
 ```
 ## <span class="red">Ejercicio 10</span>
  Desarrollar un algoritmo que invierta un número entero sin convertirlo a cadena.
