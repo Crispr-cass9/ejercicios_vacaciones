@@ -10,4 +10,4 @@ def invertir(n=1023):
 
     return n%10 * 10 ** math.trunc(math.log10(n)) +  invertir(n//10) 
 
-print(invertir(-123456789))
+print(invertir(123456789))

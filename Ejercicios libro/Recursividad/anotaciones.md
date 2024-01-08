@@ -189,9 +189,10 @@ print(serie(4))
 ```
 
 
-### Notas de Cristian, aún no logro resolverlo D:
 
 ## <span class="red">Ejercicio 8</span>
+
+### Notas de Cristian, aún no logro resolverlo D:
 
 Implementar una función para calcular el logaritmo entero de número n en una base b. Recordar que:
 Eppa, notas de Cristian, el libro aparentemente tiene un pequeño error, aparece esta imagen:
@@ -264,4 +265,25 @@ print(invertir(-123456789))
  ```
 
 ## <span class="red">Ejercicio 12</span>
- Desarrollar el algoritmo de Euclides para calcular también el mínimo común múltiplo (MCM) de dos números enteros
+ Desarrollar el algoritmo de Euclides para calcular también el mínimo común múltiplo (MCM) de dos números enteros.
+ 
+ ```python
+ def MCM(num1, num2, formula):
+    if num1%num2==0:
+        return num2
+
+    if num1>num2:
+        if not formula:
+            return (num1*num2)//MCM(num2, num1%num2, True)
+        return(MCM(num2, num1%num2, True))
+    if not formula:
+        return (num1*num2)//MCM(num1, num2%num1, True)
+    return MCM(num1, num2%num1, True)
+
+ print(MCM(350,450, False))
+ #-->3150
+```
+
+## <span class="red">Ejercicio 13</span>
+ Desarrollar un algoritmo que permita realizar la suma de los dígitos de un número entero, no se puede convertir el número a cadena.
+ 
