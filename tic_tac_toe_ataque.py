@@ -1,5 +1,8 @@
 from random import randrange
 
+'''
+No finalizado por falta de motivaccion del programador (Le da flojera)
+'''
     
 board = [[1,2,3]
        ,[4,'X',6]

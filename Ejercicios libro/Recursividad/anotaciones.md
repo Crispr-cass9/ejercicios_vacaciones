@@ -244,3 +244,24 @@ print(invertir(-123456789))
 
 ## <span class="red">Ejercicio 11</span>
 
+ Desarrollar el algoritmo de Euclides para calcular el máximo común divisor (MCD) de dos números enteros.
+
+ ```python
+ '''
+ Recomiendo buscar información sobre el algoritmo de euclides, es más fácil de lo que parece
+ '''
+ def MCD(num1, num2):
+    if num1%num2==0:
+        return num2
+
+    if num1>num2:
+        return MCD(num2, num1%num2)
+    
+    return MCD(num1, num2%num1)
+
+    print(MCD(350,450))
+    #-->50
+ ```
+
+## <span class="red">Ejercicio 12</span>
+ Desarrollar el algoritmo de Euclides para calcular también el mínimo común múltiplo (MCM) de dos números enteros
